@@ -56,6 +56,7 @@ if __name__ == '__main__':
     for row in reader:
         row['Timestamp'] = convert_timestamp(row['Timestamp'])
         row['ZIP'] = pad_zipcode(row['ZIP'])
+        row['FullName'] = row['FullName'].upper()
         row['FooDuration'] = convert_duration(row['FooDuration'])
         row['BarDuration'] = convert_duration(row['BarDuration'])
         row['TotalDuration'] = total_duration(row['FooDuration'], row['BarDuration'])
