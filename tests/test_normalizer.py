@@ -27,3 +27,20 @@ class TestPadZipcode:
 
     def test_long_zip(self):
         assert normalizer.pad_zipcode('123456') == '123456'
+
+
+class TestConvertDuration:
+    def test_zero_duration(self):
+        assert normalizer.convert_duration('00:00:00.000') == '0.0'
+
+    def test_nonzero_duration(self):
+        assert normalizer.convert_duration('1:23:32.123') == '5012.123'
+
+    def test_large_duration(self):
+        assert normalizer.convert_duration('111:23:32.123') == '401012.123'
+
+
+class TestTotalDuration:
+    def test_large_sum(self):
+        assert normalizer.total_duration('5012.123', '401012.123') == '406024.246'
+
