@@ -5,6 +5,8 @@ import csv
 import pytz
 import datetime
 
+ZIPCODE_LENGTH = 5
+
 
 def convert_timestamp(original_timestamp: str) -> str:
     """Parse timestamp from text, convert from US/Pacific to US/Eastern time zone,
@@ -15,6 +17,10 @@ def convert_timestamp(original_timestamp: str) -> str:
     original_time = datetime.datetime.strptime(original_timestamp, '%m/%d/%y %I:%M:%S %p')
     original_time = pacific.localize(original_time)
     return original_time.astimezone(eastern).isoformat()
+
+
+def pad_zipcode(zipcode: str) -> str:
+    return zipcode.zfill(ZIPCODE_LENGTH)
 
 
 if __name__ == '__main__':
@@ -32,4 +38,5 @@ if __name__ == '__main__':
     writer.writeheader()
     for row in reader:
         row['Timestamp'] = convert_timestamp(row['Timestamp'])
+        row['ZIP'] = pad_zipcode(row['ZIP'])
         writer.writerow(row)

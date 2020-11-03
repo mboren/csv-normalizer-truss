@@ -16,3 +16,14 @@ class TestConvertTimestamp:
         input_text = '3/12/16 11:01:00 PM'
         expected = '2016-03-13T03:01:00-04:00'
         assert normalizer.convert_timestamp(input_text) == expected
+
+
+class TestPadZipcode:
+    def test_valid_zip(self):
+        assert normalizer.pad_zipcode('94121') == '94121'
+
+    def test_short_zip(self):
+        assert normalizer.pad_zipcode('12') == '00012'
+
+    def test_long_zip(self):
+        assert normalizer.pad_zipcode('123456') == '123456'
