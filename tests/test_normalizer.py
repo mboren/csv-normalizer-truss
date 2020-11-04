@@ -1,4 +1,5 @@
 import normalizer
+import pytest
 
 
 class TestConvertTimestamp:
@@ -16,6 +17,12 @@ class TestConvertTimestamp:
         input_text = '3/12/16 11:01:00 PM'
         expected = '2016-03-13T03:01:00-04:00'
         assert normalizer.convert_timestamp(input_text) == expected
+
+    def test_timestamp_with_utf8_replacement_char(self):
+        input_text = '3/12/1� 11:01:00 PM'
+
+        with pytest.raises(normalizer.ParseError):
+            normalizer.convert_timestamp(input_text)
 
 
 class TestPadZipcode:
@@ -39,8 +46,11 @@ class TestConvertDuration:
     def test_large_duration(self):
         assert normalizer.convert_duration('111:23:32.123') == '401012.123'
 
+    def test_duration_with_utf8_replacement_char(self):
+        with pytest.raises(normalizer.ParseError):
+            normalizer.convert_duration('111:2�3:32.123')
+
 
 class TestTotalDuration:
     def test_large_sum(self):
         assert normalizer.total_duration('5012.123', '401012.123') == '406024.246'
-
