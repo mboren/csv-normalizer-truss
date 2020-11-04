@@ -65,10 +65,17 @@ if __name__ == '__main__':
 
     writer.writeheader()
     for row in reader:
-        row['Timestamp'] = convert_timestamp(row['Timestamp'])
-        row['ZIP'] = pad_zipcode(row['ZIP'])
-        row['FullName'] = row['FullName'].upper()
-        row['FooDuration'] = convert_duration(row['FooDuration'])
-        row['BarDuration'] = convert_duration(row['BarDuration'])
-        row['TotalDuration'] = total_duration(row['FooDuration'], row['BarDuration'])
-        writer.writerow(row)
+        try:
+            row['Timestamp'] = convert_timestamp(row['Timestamp'])
+            row['ZIP'] = pad_zipcode(row['ZIP'])
+            row['FullName'] = row['FullName'].upper()
+            row['FooDuration'] = convert_duration(row['FooDuration'])
+            row['BarDuration'] = convert_duration(row['BarDuration'])
+            row['TotalDuration'] = total_duration(row['FooDuration'],
+                                                  row['BarDuration'])
+        except ParseError as err:
+            sys.stderr.write(
+                'Excluding line {} due to parsing error: {}\n'.format(reader.line_num, err)
+            )
+        else:
+            writer.writerow(row)
