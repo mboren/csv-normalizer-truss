@@ -4,6 +4,7 @@ This is my solution to the project described at: https://github.com/trussworks/t
 # Dependencies
 - Python 3.9
 - [pytz](https://pypi.org/project/pytz/) 2020.4
+- macOS 10.15
 
 # Installation
 I used [pyenv](https://github.com/pyenv/pyenv) to manage my Python version
