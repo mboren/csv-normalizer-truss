@@ -56,7 +56,12 @@ def convert_duration(duration: str) -> str:
 
 
 def total_duration(foo_duration: str, bar_duration: str) -> str:
-    """Add up durations"""
+    """Add up durations """
+    # I'm using Decimal instead of float here because it will give the right
+    # answer 100% of the time for adding numbers with fractional parts in the
+    # thousandths, whereas floats will accumulate a bit of error. Not really
+    # enough to be significant, but enough to be surprising to humans looking
+    # at the numbers.
     return str(Decimal(foo_duration) + Decimal(bar_duration))
 
 
