@@ -57,3 +57,4 @@ $ pipenv run pytest tests
 
 # More stuff I'd do
 - Make output line ending match input line endings. 
+- Separate parsing input and formatting output.
