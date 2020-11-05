@@ -42,7 +42,7 @@ class TestPadZipcode:
 
 class TestConvertDuration:
     def test_zero_duration(self):
-        assert normalizer.convert_duration('00:00:00.000') == '0.0'
+        assert normalizer.convert_duration('00:00:00.000') == '0'
 
     def test_nonzero_duration(self):
         assert normalizer.convert_duration('1:23:32.123') == '5012.123'

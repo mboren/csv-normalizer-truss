@@ -43,11 +43,14 @@ def convert_duration(duration: str) -> str:
     """Change duration from HH:MM:SS.MS to number of seconds"""
     try:
         hours, minutes, seconds = duration.split(':')
-        total = float(seconds)
+        total = Decimal(seconds)
         total += int(minutes) * 60
         total += int(hours) * 60 * 60
     except ValueError:
         raise ParseError('Unable to parse duration: {}'.format(duration))
+
+    # remove trailing zeros
+    total = total.normalize()
 
     return str(total)
 
