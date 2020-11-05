@@ -56,12 +56,11 @@ if __name__ == '__main__':
     data = sys.stdin.buffer.read()
     data = data.decode('utf-8', 'replace')
 
-    reader = csv.DictReader(data.splitlines())
+    reader = csv.DictReader(data.splitlines(), dialect='excel')
     writer = csv.DictWriter(sys.stdout,
                             reader.fieldnames,
-                            delimiter=',',
-                            quotechar='"',
-                            quoting=csv.QUOTE_MINIMAL)
+                            dialect='excel'
+                            )
 
     writer.writeheader()
     for row in reader:
