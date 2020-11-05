@@ -53,7 +53,7 @@ $ pipenv run pytest tests
 - Since the instructions only said to drop rows if a column was unparseable due to invalid UTF-8 characters,
   I'm not dropping rows with zip codes that are longer than 5 digits.
 - I assumed Python's [str.upper](https://docs.python.org/3/library/stdtypes.html#str.upper) function is sufficient for
-  capitalizing non-english characters. There are different ways to handle this
+  capitalizing non-english characters.
 
 # More stuff I'd do
 - Make output line ending match input line endings. 
