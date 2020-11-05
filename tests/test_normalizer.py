@@ -35,6 +35,10 @@ class TestPadZipcode:
     def test_long_zip(self):
         assert normalizer.pad_zipcode('123456') == '123456'
 
+    def test_nonnumeric_zip(self):
+        with pytest.raises(normalizer.ParseError):
+            normalizer.pad_zipcode('123�')
+
 
 class TestConvertDuration:
     def test_zero_duration(self):

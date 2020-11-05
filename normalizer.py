@@ -30,7 +30,13 @@ def convert_timestamp(original_timestamp: str) -> str:
 
 
 def pad_zipcode(zipcode: str) -> str:
-    return zipcode.zfill(ZIPCODE_LENGTH)
+    """Validate and prepend zeroes to zipcode to make its length at least 5"""
+    try:
+        padded_zipcode = str(int(zipcode)).zfill(ZIPCODE_LENGTH)
+    except ValueError:
+        raise ParseError('Zip code should only have digits: {}'.format(zipcode))
+
+    return padded_zipcode
 
 
 def convert_duration(duration: str) -> str:
