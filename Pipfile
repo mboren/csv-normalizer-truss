@@ -7,7 +7,7 @@ verify_ssl = true
 pytest = "*"
 
 [packages]
-pytz = "*"
+pytz = "2020.4"
 
 [requires]
 python_version = "3.9"
